@@ -1,5 +1,5 @@
 import React from "react"
-import {Card, Button} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 
 export const RestaurantCard = ({restaurant}) => {
     return(
@@ -15,7 +15,6 @@ export const RestaurantCard = ({restaurant}) => {
                     restaurant.open ? "Open Now" : "Closed"
                 }
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
             </Card.Body>
         </Card>
         </>

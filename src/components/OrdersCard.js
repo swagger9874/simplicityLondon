@@ -1,5 +1,5 @@
 import React from "react"
-import {Card, Button} from "react-bootstrap";
+import {Card} from "react-bootstrap";
 
 export const OrdersCard = ({order}) => {
     return(
@@ -19,8 +19,6 @@ export const OrdersCard = ({order}) => {
                     })}
                 </ul>
                 </span>
-                
-                <Button variant="primary">Go somewhere</Button>
             </Card.Body>
         </Card>
         </>
