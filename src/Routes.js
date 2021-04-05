@@ -6,7 +6,6 @@ import BasePage from "./pages/BasePage"
 
 export function Routes() {
     const isAuthorized  = localStorage.getItem("authToken") ? true : false;
-    console.log(localStorage.getItem("authToken"))
     return (
       <Switch>
         {!isAuthorized ? (

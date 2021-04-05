@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import {useHistory} from "react-router-dom"
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../assets/Login.css";
@@ -11,7 +10,6 @@ export default function AuthPage(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [Login, {error}] = useMutation(LOGIN_USER_MUTATION)
-    const history = useHistory()
 
   const validateForm = () => {
     return email.length > 0 && password.length > 0;
@@ -41,6 +39,7 @@ export default function AuthPage(){
 
   return (
     <div className="Login">
+      <h3 style={{textAlign:"center"}}>Welcome</h3>
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -59,7 +58,7 @@ export default function AuthPage(){
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <Button block size="lg" style={{marginTop:"15px",width: "100%"}} type="submit" disabled={!validateForm()}>
           Login
         </Button>
       </Form>

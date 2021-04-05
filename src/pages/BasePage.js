@@ -2,6 +2,7 @@ import React from "react"
 import { Redirect, Switch, Route } from "react-router-dom";
 import { Orders } from "./Orders";
 import { Restaurants } from "./Restaurants";
+import { UserPage } from "./UserPage";
 
 export default function BasePage() {
   
@@ -12,7 +13,8 @@ export default function BasePage() {
             <Redirect exact from="/" to="/restaurants" />
           }
           <Route path="/restaurants" component={Restaurants} />
-          <Route path="/orders" component={Orders} />
+          <Route path="/pastOrders" component={Orders} />
+          <Route path="/userPage" component={UserPage} />
         </Switch>
     );
   }

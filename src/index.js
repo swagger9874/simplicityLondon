@@ -4,32 +4,38 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter} from "react-router-dom"
-import {ApolloProvider, ApolloClient, InMemoryCache,from,HttpLink} from "@apollo/client"
+import {ApolloProvider,ApolloLink, concat, ApolloClient, InMemoryCache,from,HttpLink} from "@apollo/client"
 import { onError } from "@apollo/client/link/error"
 
 const errorLink = onError(({ graphQLErrors, networkError}) => {
   if(graphQLErrors){
     graphQLErrors.map(({message}) => {
-      alert(`Graphql Error: ${message}`)
+      return(
+        alert(`Graphql Error: ${message}`)
+      )
     })
   }
 })
 
 const link = from([
   errorLink,
-  new HttpLink({ uri : "https://simplicityhw.cotunnel.com/graphql" })
+  new HttpLink({  uri : "https://simplicityhw.cotunnel.com/graphql" })
 ])
+
+const authMiddleware = new ApolloLink((operation, forward) => {
+  // add the authorization to the headers
+  operation.setContext({
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("authToken")}`,
+    }
+  });
+
+  return forward(operation);
+})
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link : link,
-  request : async operation => {
-    operation.setContext({
-      headers : {
-        Authorization : `Bearer ${localStorage.getItem("authToken")}`
-      }
-    })
-  }
+  link : concat(authMiddleware, link),
 })
 
 ReactDOM.render(
